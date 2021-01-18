@@ -44,11 +44,12 @@
 </template>
 
 <script lang="ts">
+import Vue from 'vue'
 import { mapState } from 'vuex'
 import { MaterialData } from '@/store/materials/types'
 import { SnapType } from '@/store/types'
 
-export default {
+export default Vue.extend({
   name: 'SnapType',
   data () {
     return {
@@ -74,5 +75,5 @@ export default {
       this.$store.dispatch('updateMaterial', material)
     }
   }
-}
+})
 </script>

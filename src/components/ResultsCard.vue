@@ -24,11 +24,12 @@
 </template>
 
 <script lang="ts">
+import Vue from 'vue'
 import { mapGetters, mapState } from 'vuex'
 import { MaterialData } from '@/store/materials/types'
 import { InputData } from '@/store/types'
 
-export default {
+export default Vue.extend({
   name: 'Inputs',
   data () {
     return {
@@ -50,5 +51,5 @@ export default {
       this.$store.commit('updateCalculation', calcMethod)
     }
   }
-}
+})
 </script>
