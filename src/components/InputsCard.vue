@@ -51,10 +51,7 @@ export default {
     ...mapGetters(['activeInputs'])
   },
   methods: {
-    updateSnapType (type: object) {
-      this.$store.commit('updateSnapType', type)
-    },
-    getUnits (input: InputData) {
+    getUnits (input: InputData): string {
       return this.unitAssignment[this.units][input.measurementType]
     },
     updateCalculation (calcMethod: MaterialData) {

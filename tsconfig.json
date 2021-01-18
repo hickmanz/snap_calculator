@@ -1,19 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "es6",
-    "strict": true,
+    "target": "esnext",
+    "module": "esnext",
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
-      "webpack-env"
+      "webpack-env",
+      "vuetify",
+      "vuex"
     ],
     "paths": {
       "@/*": [

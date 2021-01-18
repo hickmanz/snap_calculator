@@ -46,6 +46,7 @@
 <script lang="ts">
 import { mapState } from 'vuex'
 import { MaterialData } from '@/store/materials/types'
+import { SnapType } from '@/store/types'
 
 export default {
   name: 'SnapType',
@@ -59,14 +60,14 @@ export default {
     ...mapState(['snapType', 'snapOptions', 'inputs', 'materials', 'selectedMaterial']),
     snapImage () {
       if (Object.keys(this.snapType).length === 0) {
-        return
+        return undefined
       }
-      const fileName = this.snapType.image
+      const fileName: string = this.snapType.image
       return require(`../assets/snaptype/${fileName}`)
     }
   },
   methods: {
-    updateSnapType (type: object) {
+    updateSnapType (type: SnapType) {
       this.$store.commit('updateSnapType', type)
     },
     updateMaterial (material: MaterialData) {

@@ -27,7 +27,6 @@
 import { mapGetters, mapState } from 'vuex'
 import { MaterialData } from '@/store/materials/types'
 import { InputData } from '@/store/types'
-import func from 'vue-temp/vue-editor-bridge'
 
 export default {
   name: 'Inputs',
@@ -44,7 +43,7 @@ export default {
     updateSnapType (type: object) {
       this.$store.commit('updateSnapType', type)
     },
-    getUnits (input: InputData) {
+    getUnits (input: InputData): string {
       return this.unitAssignment[this.units][input.measurementType]
     },
     updateCalculation (calcMethod: MaterialData) {

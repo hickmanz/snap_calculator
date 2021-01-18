@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { RootState, CalculationData, Scope, ResultsData } from './types'
+import { RootState, CalculationData, Scope, InputData, ResultsData, SnapType } from './types'
 import { materials } from './materials'
 import { equations } from './equations'
-import { create, all, parse, exp } from 'mathjs'
+import { create, all } from 'mathjs'
 
 Vue.use(Vuex)
 
@@ -175,11 +175,11 @@ export default new Vuex.Store<RootState>({
     equations
   },
   mutations: {
-    updateSnapType (state, type) {
-      state.snapType = type
+    updateSnapType (state, type: SnapType) {
+      Vue.set(state, 'snapType', type)
     },
     updateCalculation (state, type: CalculationData) {
-      state.selectedCalculation = type
+      Vue.set(state, 'selectedCalculation', type)
     },
     updateInput (state, payload) {
       state.inputs[payload.key].value = Number(payload.value)
@@ -242,7 +242,6 @@ export default new Vuex.Store<RootState>({
           return
         } else {
           expressions = context.getters.getEquationExpressions
-          console.log(expressions)
         }
         let inputsMissing = 0
         calcData.requiresInputs.forEach(inputId => {
@@ -262,11 +261,9 @@ export default new Vuex.Store<RootState>({
       if (errFound) {
         return
       }
-      console.dir(scope)
       // Use list of equations
       expressions.forEach(expr => {
         if (!math.evaluate) {
-          console.log('Error: Math function has no property evaluate')
           return
         }
         math.evaluate(expr, scope)
@@ -290,7 +287,7 @@ export default new Vuex.Store<RootState>({
   },
   getters: {
     activeInputs (state) {
-      const activeInputs: Array<object> = []
+      const activeInputs: Array<InputData> = []
       if (state.selectedCalculation) {
         state.selectedCalculation.requiresInputs.forEach(function (inputId: string) {
           const newActiveInputs = state.inputs[inputId]
@@ -300,7 +297,7 @@ export default new Vuex.Store<RootState>({
       return activeInputs
     },
     activeResults (state) {
-      const activeResults: Array<object> = []
+      const activeResults: Array<ResultsData> = []
       if (state.selectedCalculation) {
         state.selectedCalculation.availableResults.forEach(function (resultId: string) {
           const newActiveResults = state.results[resultId]
