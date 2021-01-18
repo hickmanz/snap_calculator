@@ -1,0 +1,77 @@
+<template>
+    <div>
+        <v-card>
+            <v-card-title class="headline">
+                Snap Details
+            </v-card-title>
+            <v-container>
+                <v-row >
+                     <v-col cols="12">
+                        <v-select
+                        :items="snapOptions"
+                        :reduce="snapOptions => snapOptions.name"
+                        :value="snapType"
+                        @input="updateSnapType"
+                        label="Snap Type"
+                        return-object
+                        ></v-select>
+                     </v-col>
+                </v-row>
+                <v-row v-show="Object.keys(this.snapType).length > 0">
+                    <v-col cols="12" md="6">
+                            <img :src="snapImage" alt='picture'/>
+                    </v-col>
+                    <v-col cols="12" md="6">
+                            <v-card-text>
+                                Description of snap
+                            </v-card-text>
+                    </v-col>
+                </v-row>
+                <v-row >
+                     <v-col cols="12">
+                        <v-select
+                        :items="materials"
+                        :value="selectedMaterial"
+                        @input="updateMaterial"
+                        label="Material"
+                        return-object
+                        ></v-select>
+                     </v-col>
+                </v-row>
+            </v-container>
+        </v-card>
+    </div>
+</template>
+
+<script lang="ts">
+import { mapState } from 'vuex'
+import { MaterialData } from '@/store/materials/types'
+
+export default {
+  name: 'SnapType',
+  data () {
+    return {
+      message: '',
+      snapShown: false
+    }
+  },
+  computed: {
+    ...mapState(['snapType', 'snapOptions', 'inputs', 'materials', 'selectedMaterial']),
+    snapImage () {
+      if (Object.keys(this.snapType).length === 0) {
+        return
+      }
+      const fileName = this.snapType.image
+      return require(`../assets/snaptype/${fileName}`)
+    }
+  },
+  methods: {
+    updateSnapType (type: object) {
+      this.$store.commit('updateSnapType', type)
+    },
+    updateMaterial (material: MaterialData) {
+      this.$store.dispatch('updateMaterial', material)
+    }
+  }
+}
+</script>
