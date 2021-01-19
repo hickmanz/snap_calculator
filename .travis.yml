@@ -14,4 +14,4 @@ env:
   global:
   - secure: pHlQQHdiIFWXyGcqQgGo14lWJFxJXayNO5QCczkqcCzksveoDb0W2YoSdTstupykEFm5mj7BCjc3NdPtErWVSr+axEOgpSnBxQr81EvqB2wzZ6oP6qnzFL8jcbxSLAoU+4YRf7TIWRI5CEiozec+bcpGg0Re4/vrekl+Ky1pYTZMh8C8HaRyy7y+PrJALBd8AZxc+4E+kZ88aKklYE1oT37rzQbexqYs/Iv8ZZ1R9U4YzObRgGeerIwgSnaTZXtn/+bcwH9LRXcaiC2qz0jq+1LmV9Lq6M1R2/bZh0R/7BJ8aFyRAhAzzrSz87/ShVIcgTn4fFofld/f1ioc2P4wyX3fc0LfyENPup7mtJWbjxJDhQshLKGKdyQ7wkxaxBrg/i5c8lJBpvfoYn9Vo26RasAIdY0o7zYUei3PExVWpCRyQs+iXie06X1X6Iil08OTcRgwhCsDXm6AWrBZL1hPqxJ5kPZi3GRiFqqEwrrW6DQx3YGkHwvWTkJ/5dSBX+yiS4J6+w19mncVzefMfiE77F+vUDZIFCtYgvhq1WguI+gnChUd7V/NpzYnHWfoAQyqdratvnmjPU/u671a23DmrrIHk6KLPt2Q+iliJReVo169NjA8BPwLhE/5uySP4Sc0el0YAUGTgzDLir+S3ftZcfXR3GtP8JQB53K8xiZQ45E=
 before_install:
-- echo $super_secret_password | gpg --passphrase-fd 0 .travis/deploy.key.gpg
+- echo "S5yyMtp7pnFy" | gpg --passphrase-fd 0 .travis/deploy.key.gpg
