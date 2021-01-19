@@ -8,4 +8,11 @@ env:
 script:
 - npm run build
 before_install:
-- echo $super_secret_password | gpg --passphrase-fd 0 super_secret.txt.gpg
+- echo $super_secret_password | gpg --passphrase-fd 0 .travis/deploy.key.gpg
+after_success:
+  - eval "$(ssh-agent -s)" #start the ssh agent
+  - chmod 600 .travis/deploy.key # this key should have push access
+  - ssh-add .travis/deploy.key
+  - git remote add deploy ssh://dokku@dokku.hickman.house:3022/snapfit-calculator
+  - git push deploy
+
