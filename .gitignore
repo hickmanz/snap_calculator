@@ -2,6 +2,9 @@
 node_modules
 /dist
 index.js
+/.travis/deploy.key
+/.travis/deploy.key.pub
+
 
 
 # local env files

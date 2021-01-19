@@ -1,4 +1,6 @@
 # snapfit-calculator
+[![NPM version](https://img.shields.io/npm/v/snap_calculator.svg?style=flat-square)](https://www.npmjs.com/package/snap_calculator)
+
 
 ## Project setup
 ```
