@@ -1,8 +1,11 @@
 language: node_js
 node_js:
-  - lts/*
+- lts/*
 cache: npm
+env:
+  global:
+    secure: g9mT6XIQ/b3gyjgrFraCKzDmliscd3FY6G/cXgt+Q262b+OoR/YBrYFauSQSGguqJiCdy15Pr4YOQCoTgDn2hoJhh5YUc2Pui6nqz8EZB8uN9/SIPO6sVO3k9gvwRY6gZuBwnfjCpxERB6jyVaoxldNzZQemVn03lww/52SgWT43QWf5HPDS5+egCT9PUBDEUpsN3IYubYjr1PE5e1N9MlvRQr8ePnRjxQqymREIGKmCbqyLEfJ66hmmNrHne/duzRESDByStL29GTHxacF97mvP7GHNqhyBgUI+NIFXohw4rte3wLXZWhCI39Bx+nCmgzPL7Wx+Y3aqQjRYG/A6TurgT2Rj+J1cUKt3iq4fZm01sHQAuQL4W4CRLC+eLQlwSaau/kADqclozEHHP3wEwS/fxFNw/GHc0U7M9nuh1N09o8t6uhxBWIFBL4ryilICpzGhr8hGZ7J4g+6Bi7ADMzYTvvHGXGJWMgSNHMJ7C1Dlip5lcX76QA75dma5nxODcnzkR4K0thSX6PcLWFZbGh7PbB76wIanNRffViHjQLFOJ8iCkYnMR4JbqbTwMeNjtvAj+RVwa/5ouLOtLQorAazBTJ6/ioLD04pGP7WQg7iGftglmb3bpE8ESoQY0LdnLZ7+YJbRnovi7qTf2/uMpBQNc2ukO2PvYp46/yjBysc=
 script:
-  - npm run build
+- npm run build
 before_install:
-  - echo $super_secret_password | gpg --passphrase-fd 0 super_secret.txt.gpg
+- echo $super_secret_password | gpg --passphrase-fd 0 super_secret.txt.gpg
