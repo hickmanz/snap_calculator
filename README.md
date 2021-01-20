@@ -1,6 +1,6 @@
 # Snap Calculator
 [![Build Status](https://www.travis-ci.com/hickmanz/snap_calculator.svg?branch=main)](https://www.travis-ci.com/hickmanz/snap_calculator)
-https://img.shields.io/badge/vue-2.2.4-green.svg
+
 Vue.js based snap calculator. 
 
 ## Adding Snap Types
