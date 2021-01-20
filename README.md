@@ -1,5 +1,10 @@
-# snapfit-calculator
-[![NPM version](https://img.shields.io/npm/v/snap_calculator.svg?style=flat-square)](https://www.npmjs.com/package/snap_calculator)
+# Snap Calculator
+[![Build Status](https://www.travis-ci.com/hickmanz/snap_calculator.svg?branch=main)](https://www.travis-ci.com/hickmanz/snap_calculator)
+
+Vue.js based snap calculator. 
+
+## Adding Snap Types
+
 
 
 ## Project setup
