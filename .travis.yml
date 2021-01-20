@@ -6,7 +6,7 @@ script:
 - npm run build
 addons:
   ssh_known_hosts:
-  - dokku.hickman.house
+  - dokku.hickman.house:3022
 after_success:
 - eval "$(ssh-agent -s)"
 - chmod 600 .travis/deploy.key
