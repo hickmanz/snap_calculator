@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve && tsc --esModuleInterop index.ts",
+    "serve": "vue-cli-service serve",
+    "prep-express": "tsc --esModuleInterop index.ts",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": ""
+    "start": "node index.js"
   },
   "dependencies": {
     "@types/regression": "^2.0.0",
