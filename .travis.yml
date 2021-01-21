@@ -12,7 +12,7 @@ after_success:
 - chmod 600 .travis/deploy.key
 - ssh-add .travis/deploy.key
 - git remote add deploy ssh://dokku@dokku.hickman.house:3022/snapfit-calculator
-- git push deploy HEAD:master
+- git push deploy HEAD:master -f
 env:
   global:
     - secure: Iraf9I81rSSzmlubkzhug8NfNpr6MRb8PbIRxggW5enT7tA1t9zv2hKu34EAEbNeLlxfITRkZwPrJdindiqDrOIr0e5c2ZB0cqIhCadDFzbKXWmesFm8YuUqoHLXiZ7PixCosiQ4rSL14ZPhYKSQbT/6TQzdDFnG1Lli97IONGKJOCtXXrPtfjf87MtTdiXNUDlgpgfbIo4646mkrXuf2p9aFLb3iV5nJBDjJUyfQOCWseuPOcOLHqSAFmfRL2hf7lJiFuzPDZ6OXgTQp88BzVTKwm0gEzVOYAxppdjrOnXNX4ZPJN04Uvf6xzuuJQgbu1MIOhw0ZNVwFzhquhbA8Z+NtFjnfmqPXFoCThtq1qY6CBrZM5qZ0gAoB3JkYpCFFwBnvmhHiUnucl88haJPGNS+ljkkoc4szien4hlh7xUBxa5Amf8dD8gHwQjnZNFmnOqIR1gL8Y9CTlUnRoR6enA8sLcYeTAQLv2R+DQXpHpuMh5gvT1qLgi6GHtULnnUnhc4y9mxhiTncgaODKrm23/j9EJ3td8jXmvxPYEsILtLLebXRDX1iQKjBaa+/j6CedWoPpA/aJFIAZ6E+KAlx/BKSCiCc053gfza6CWyCHH6tsmaz3LWIzLuPtOTMK7WwYbHa3OeV3jfCeiH/NBHxnxIOYgTbja67INDs7fsCpA=
