@@ -10,7 +10,7 @@
               {{ result.name}} ({{ result.variable }}) -
           </v-col>
           <v-col cols="12" md="6">
-              {{ result.value }} {{ getUnits(result) }}
+              {{ formatResult(result) }} {{ getUnits(result) }}
           </v-col>
         </v-row>
         <v-row >
@@ -27,7 +27,7 @@
 import Vue from 'vue'
 import { mapGetters, mapState } from 'vuex'
 import { MaterialData } from '@/store/materials/types'
-import { InputData } from '@/store/types'
+import { InputData, ResultsData } from '@/store/types'
 
 export default Vue.extend({
   name: 'Inputs',
@@ -49,6 +49,16 @@ export default Vue.extend({
     },
     updateCalculation (calcMethod: MaterialData) {
       this.$store.commit('updateCalculation', calcMethod)
+    },
+    formatResult (result: ResultsData) {
+      if (result.value) {
+        if (result.measurementType === 'strain') {
+          return (result.value * 100).toFixed(1)
+        }
+        return result.value.toFixed(2)
+      } else {
+        console.log('you shouldnt be here. something is wrong')
+      }
     }
   }
 })

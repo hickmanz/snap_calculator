@@ -1,50 +1,50 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { RootState, CalculationData, Scope, InputData, ResultsData, SnapType } from './types'
+
+import { actions } from './actions'
+
+import { RootState, CalculationData, InputData, ResultsData, SnapType } from './types'
 import { materials } from './materials'
 import { equations } from './equations'
-import { create, all } from 'mathjs'
+import { qEquations } from './qCurves'
 
 Vue.use(Vuex)
-
-const math = create(all)
 
 export default new Vuex.Store<RootState>({
   state: {
     units: 'metric',
-    selectedMaterial: {
-    },
     selectedCalculation: undefined,
-    snapType: {
-    },
     unitAssignment: {
       metric: {
         distance: 'mm',
         force: 'N',
-        angle: 'degrees'
+        angle: 'degrees',
+        strain: '%'
       },
       standard: {
         distance: 'in',
         force: 'lbf',
-        angle: 'degrees'
+        angle: 'degrees',
+        strain: '%'
       }
     },
     calculationSequences: [
       {
-        text: 'Force and strain given deflection',
+        text: 'Normal force and strain given deflection',
         id: 1,
         requiresInputs: [
-          'inpt1', 'inpt3', 'inpt5', 'inpt2'
+          'inpt1', 'inpt2', 'inpt3', 'inpt6'
         ],
         availableResults: [
-          'rslt1', 'rslt2'
+          'rslt1', 'rslt5'
         ],
+        needsQ: true,
         solveEquations: [
-          'eq1', 'eq2'
+          'eq3', 'eq2'
         ]
       },
       {
-        text: 'Deflection required',
+        text: 'Deflection required (DONT USE)',
         id: 2,
         requiresInputs: [
           'inpt1', 'inpt3', 'inpt4'
@@ -52,6 +52,7 @@ export default new Vuex.Store<RootState>({
         availableResults: [
           'rslt3', 'rslt4'
         ],
+        needsQ: false,
         solveEquations: [
           'eq1', 'eq2'
         ]
@@ -92,6 +93,13 @@ export default new Vuex.Store<RootState>({
         variable: 'alpha2',
         measurementType: 'angle',
         id: 5
+      },
+      inpt6: {
+        name: 'Deflection',
+        identifier: 'deflection',
+        variable: 'Y',
+        measurementType: 'distance',
+        id: 6
       }
     },
     results: {
@@ -122,6 +130,14 @@ export default new Vuex.Store<RootState>({
         measurementType: 'distance',
         id: 4,
         value: undefined
+      },
+      rslt5: {
+        name: 'Maximum Strain',
+        displayVariable: '∈',
+        variable: 'S',
+        measurementType: 'strain',
+        id: 5,
+        value: undefined
       }
     },
     errors: {
@@ -140,39 +156,30 @@ export default new Vuex.Store<RootState>({
       err4: {
         txt: 'Inputs missing',
         isActive: false
+      },
+      err5: {
+        txt: 'Thats a weird aspect ratio snap, bud',
+        isActive: false
       }
     },
     snapOptions: [
       {
-        text: 'Tapered Snap 1',
+        text: 'Tapered Snap - Type 2',
         disabled: false,
-        image: '1.jpg',
-        id: 1,
-        requiresInputs: [
-          1, 3, 5, 2
-        ]
+        image: 't2.jpg',
+        id: 't2'
       }, {
-        text: 'Tapered Snap 2',
-        disabled: false,
-        image: '2.jpg',
-        id: 2,
-        requiresInputs: [
-          1, 2
-        ]
-      }, {
-        text: 'Uniform Snap',
+        text: 'Uniform Snap - DO NOT USE',
         disabled: false,
         image: '3.jpg',
-        id: 3,
-        requiresInputs: [
-          1
-        ]
+        id: 'u1'
       }
     ]
   },
   modules: {
     materials,
-    equations
+    equations,
+    qEquations
   },
   mutations: {
     updateSnapType (state, type: SnapType) {
@@ -185,106 +192,13 @@ export default new Vuex.Store<RootState>({
       state.inputs[payload.key].value = Number(payload.value)
     },
     updateMaterial (state, data) {
-      state.selectedMaterial = data
+      Vue.set(state, 'selectedMaterial', data)
     },
     updateResults (state, payload) {
       state.results[payload.key].value = Number(payload.value)
     }
   },
-  actions: {
-    updateInput (context, payload) {
-      for (const inputField in context.state.inputs) {
-        if (context.state.inputs[inputField].id === payload.id) {
-          payload.key = inputField
-          context.commit('updateInput', payload)
-        }
-      }
-      context.dispatch('updateResults')
-    },
-    updateMaterial (context, data) {
-      context.commit('updateMaterial', data)
-      context.dispatch('updateResults')
-    },
-    updateCalculation (context, data) {
-      context.commit('updateCalculation', data)
-      context.dispatch('updateResults')
-    },
-    updateResults (context) {
-      // do math in here. call it with every actions that would affect calculation (input change or calculation type or material or snap type)
-      const scope: Scope = {}
-      let expressions: string[] = []
-      let calcData
-      let errFound = false
-      // Data validation
-      if (Object.keys(context.state.snapType).length === 0) {
-        context.state.errors.err1.isActive = true
-        errFound = true
-      } else {
-        context.state.errors.err1.isActive = false
-      }
-
-      if (Object.keys(context.state.selectedMaterial).length === 0) {
-        context.state.errors.err2.isActive = true
-        errFound = true
-      } else {
-        context.state.errors.err2.isActive = false
-      }
-
-      if (!context.state.selectedCalculation) {
-        context.state.errors.err3.isActive = true
-        errFound = true
-        return
-      } else {
-        calcData = context.state.selectedCalculation
-        context.state.errors.err3.isActive = false
-        if (!context.state.equations) {
-          alert('Equations are not set in the value store')
-          return
-        } else {
-          expressions = context.getters.getEquationExpressions
-        }
-        let inputsMissing = 0
-        calcData.requiresInputs.forEach(inputId => {
-          if (!context.state.inputs[inputId].value) {
-            inputsMissing++
-          } else {
-            scope[context.state.inputs[inputId].variable] = context.state.inputs[inputId].value
-          }
-        })
-        if (inputsMissing > 0) {
-          context.state.errors.err4.isActive = true
-          errFound = true
-        } else {
-          context.state.errors.err4.isActive = false
-        }
-      }
-      if (errFound) {
-        return
-      }
-      // Use list of equations
-      expressions.forEach(expr => {
-        if (!math.evaluate) {
-          return
-        }
-        math.evaluate(expr, scope)
-      })
-
-      calcData.availableResults.forEach(function (resultId: string) {
-        const payload = {
-          key: resultId,
-          value: scope[context.state.results[resultId].variable]
-        }
-        context.commit('updateResults', payload)
-      })
-      // get data on solveEquations from selected calc
-      // solve required equations in order
-      // get available results from selectedcalc
-      // step through availresults -> get var -> lookup var in scope -> set each result with a commit
-
-      // const h = parse('x^2 + x')
-      // console.log(h.evaluate({ x: 3 })) // '7'
-    }
-  },
+  actions,
   getters: {
     activeInputs (state) {
       const activeInputs: Array<InputData> = []

@@ -69,7 +69,7 @@ export default Vue.extend({
   },
   methods: {
     updateSnapType (type: SnapType) {
-      this.$store.commit('updateSnapType', type)
+      this.$store.dispatch('updateSnapType', type)
     },
     updateMaterial (material: MaterialData) {
       this.$store.dispatch('updateMaterial', material)

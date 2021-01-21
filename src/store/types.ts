@@ -1,10 +1,12 @@
 
 import { EquationState } from '@/store/equations/types'
+import { QEquationState } from '@/store/qCurves/types'
+import { MaterialData } from './materials/types'
 
 export interface RootState {
   units: 'metric' | 'standard'
-  selectedMaterial?: any
-  snapType?: any
+  selectedMaterial?: MaterialData
+  snapType?: SnapType
   snapOptions: SnapState
   inputs: InputState
   results: ResultsState
@@ -13,6 +15,7 @@ export interface RootState {
   selectedCalculation?: CalculationData
   errors: ErrorState
   equations?: EquationState 
+  qEquations?: QEquationState
 }
 
 export interface ErrorState{
@@ -48,8 +51,7 @@ export interface SnapType {
   text: string,
   disabled: boolean,
   image: string,
-  id: number,
-  requiresInputs: number[]
+  id: string
 }
 
 export interface UnitAssignmentState {
@@ -59,8 +61,12 @@ export interface UnitAssignmentState {
 export interface UnitAssignmentType {
   distance: string,
   force: string,
-  angle: string
+  angle: string,
+  strain: string
  
+}
+export interface LooseObject {
+  [key: string]: any
 }
 
 export interface ResultsState {
@@ -69,8 +75,9 @@ export interface ResultsState {
 
 export interface ResultsData {
   name: string
+  displayVariable?: string
   variable: string
-  measurementType: 'distance' | 'angle' | 'force' | 'time'
+  measurementType: 'distance' | 'angle' | 'force' | 'time' | 'strain'
   id: number
   value?: number
 }
@@ -82,6 +89,7 @@ export interface CalculationState {
 export interface CalculationData {
   text: string
   id: number
+  needsQ: boolean
   requiresInputs: string[]
   availableResults: string[]
   solveEquations: string[]

@@ -5,22 +5,23 @@ import { RootState } from '../types'
 export const defaultState = (): MaterialState => {
   return [
     {
-      text: 'Nylon 66',
-      variable: 'L',
-      measurementType: 'distance',
-      id: 1
+      text: 'Nylon 6',
+      canBeFilled: true,
+      allowableStrain: 8,
+      allowableStrainFilled: 2.1,
+      flexuralModulus: 3102
     },
     {
-      text: 'Nylon 12',
-      variable: 'b',
-      measurementType: 'distance',
-      id: 2
+      text: 'PC',
+      canBeFilled: false,
+      allowableStrain: 8,
+      flexuralModulus: 2300
     },
     {
-      text: 'PC/ABS',
-      variable: 't',
-      measurementType: 'distance',
-      id: 3
+      text: 'ABS',
+      canBeFilled: false,
+      allowableStrain: 6.5,
+      flexuralModulus: 2500
     }
   ]
 }

@@ -9,8 +9,11 @@ export const defaultState = (): EquationState => {
 
     },
     eq2: {
-      expr: 'y = b^4 + t'
+      expr: 'P = (b * t^2 * E * S)/(6 * L)'
 
+    },
+    eq3: {
+      expr: 'S = 1.5 * ((t*Y)/(L^2*Q))'
     }
   }
 }
