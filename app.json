@@ -6,7 +6,7 @@
     "logo": "https://www.assemblymag.com/ext/resources/Issues/2014/april/snap-fit/asb0414Snap3.jpg",
     "scripts": {
         "dokku": {
-            "predeploy": "npm install -g typescript && typescript --esModuleInterop index.ts"
+            "predeploy": "npm install -g typescript && npx typescript --esModuleInterop index.ts"
         }
     }
 
