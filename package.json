@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "prep-express": "tsc --esModuleInterop index.ts",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build && npx typescript --esModuleInterop index.ts",
     "lint": "vue-cli-service lint",
     "start": "node index.js"
   },
