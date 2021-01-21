@@ -7,7 +7,8 @@
     "prep-express": "tsc --esModuleInterop index.ts",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "npx tsc --esModuleInterop index.ts && node index.js"
+    "start": "npx tsc --esModuleInterop index.ts && node index.js",
+    "dokku.predeploy": "touch /app/predeploy.test"
   },
   "dependencies": {
     "@types/regression": "^2.0.0",
@@ -52,7 +53,6 @@
     "typescript": "~3.9.3",
     "vue-cli-plugin-vuetify": "~2.0.9",
     "vue-template-compiler": "^2.6.11",
-    "vuetify-loader": "^1.3.0",
-    "tsc": "^1.20150623.0"
+    "vuetify-loader": "^1.3.0"
   }
 }
