@@ -148,6 +148,5 @@ export const actions: ActionTree<RootState, RootState> = {
       }
       context.commit('updateResults', payload)
     })
-    console.dir(scope)
   }
 }
