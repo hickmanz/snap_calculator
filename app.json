@@ -1,0 +1,13 @@
+{
+    "name": "Snap Fit Calculator",
+    "description": "This app does one little thing, and does it well.",
+    "website": "https://snap.hickman.house",
+    "repository": "https://github.com/hickmanz/snap_calculator",
+    "logo": "https://www.assemblymag.com/ext/resources/Issues/2014/april/snap-fit/asb0414Snap3.jpg",
+    "scripts": {
+        "dokku": {
+            "predeploy": "npm install -g tsc && tsc --esModuleInterop index.ts"
+        }
+    }
+
+}

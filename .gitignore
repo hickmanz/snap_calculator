@@ -4,8 +4,6 @@ node_modules
 index.js
 /.travis/deploy.key
 /.travis/deploy.key.pub
-app.json
-
 
 # local env files
 .env.local
