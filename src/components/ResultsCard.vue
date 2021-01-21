@@ -56,8 +56,6 @@ export default Vue.extend({
           return (result.value * 100).toFixed(1)
         }
         return result.value.toFixed(2)
-      } else {
-        console.log('you shouldnt be here. something is wrong')
       }
     }
   }

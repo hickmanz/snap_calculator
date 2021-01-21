@@ -44,6 +44,7 @@ export const actions: ActionTree<RootState, RootState> = {
     context.dispatch('updateResults')
   },
   updateResults (context) {
+    console.log('running')
     // do math in here. call it with every actions that would affect calculation (input change or calculation type or material or snap type)
     const scope: Scope = {}
     let expressions: string[] = []
@@ -51,7 +52,7 @@ export const actions: ActionTree<RootState, RootState> = {
     let errFound = false
 
     // Data validation
-    if (context.state.snapType) {
+    if (!context.state.snapType) {
       context.state.errors.err1.isActive = true
       errFound = true
     } else {
@@ -59,7 +60,7 @@ export const actions: ActionTree<RootState, RootState> = {
       calcData.snapType = context.state.snapType
     }
 
-    if (context.state.selectedMaterial) {
+    if (!context.state.selectedMaterial) {
       context.state.errors.err2.isActive = true
       errFound = true
     } else {

@@ -17,7 +17,7 @@
                         ></v-select>
                      </v-col>
                 </v-row>
-                <v-row v-show="Object.keys(this.snapType).length > 0">
+                <v-row v-show="this.snapType">
                     <v-col cols="12" md="6">
                             <img :src="snapImage" alt='picture'/>
                     </v-col>
@@ -60,8 +60,8 @@ export default Vue.extend({
   computed: {
     ...mapState(['snapType', 'snapOptions', 'inputs', 'materials', 'selectedMaterial']),
     snapImage () {
-      if (Object.keys(this.snapType).length === 0) {
-        return undefined
+      if (!this.snapType) {
+        return ''
       }
       const fileName: string = this.snapType.image
       return require(`../assets/snaptype/${fileName}`)
@@ -73,6 +73,13 @@ export default Vue.extend({
     },
     updateMaterial (material: MaterialData) {
       this.$store.dispatch('updateMaterial', material)
+    },
+    setSnapType () {
+      if (this.snapType) {
+        return this.snapType
+      } else {
+        return {}
+      }
     }
   }
 })
