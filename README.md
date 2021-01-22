@@ -6,9 +6,12 @@
 
 Vue.js based snap calculator. 
 
-## Adding Snap Types
-
-
+## Next Steps
+* Additional snap types
+* Unit conversions
+* Custom materials
+* Stress & % yield
+* Additional computation systems
 
 ## Project setup
 ```
