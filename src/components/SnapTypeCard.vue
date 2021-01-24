@@ -29,13 +29,13 @@
                 </v-row>
                 <v-row >
                      <v-col cols="12">
-                        <v-select
+                        <v-autocomplete
                         :items="materials"
                         :value="selectedMaterial"
                         @input="updateMaterial"
                         label="Material"
                         return-object
-                        ></v-select>
+                        ></v-autocomplete>
                      </v-col>
                 </v-row>
             </v-container>

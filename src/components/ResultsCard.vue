@@ -13,12 +13,14 @@
               {{ formatResult(result) }} {{ getUnits(result) }}
           </v-col>
         </v-row>
-        <v-row >
-          <li v-for="(error, index) in activeErrors" :key="index">
-            {{ error }}
-          </li>
-        </v-row>
-      </v-container>
+        </v-container>
+        <v-divider></v-divider>
+        <v-col v-for="(error, index) in activeErrors" :key="index" >
+        <v-alert color=warning
+          text
+          type="warning"
+          border="bottom"> {{ error }}</v-alert>
+        </v-col>
     </v-card>
   </div>
 </template>

@@ -6,7 +6,7 @@ module.exports = {
     config
       .plugin('html')
       .tap(args => {
-        args[0].title = 'Snap Calculator'
+        args[0].title = 'Snap Calc'
         return args
       })
   }

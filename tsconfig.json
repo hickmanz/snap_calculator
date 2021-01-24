@@ -14,7 +14,8 @@
     "types": [
       "webpack-env",
       "vuetify",
-      "vuex"
+      "vuex",
+      "jest"
     ],
     "paths": {
       "@/*": [

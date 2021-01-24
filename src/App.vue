@@ -2,11 +2,11 @@
   <v-app>
     <v-app-bar
       app
-      color="primary"
+      color="tertiary"
       dark
     >
       <div class="d-flex align-center">
-        Snapfit Calculator
+        <img src="./assets/logo.png" alt='picture'/>
       </div>
 
       <v-spacer></v-spacer>

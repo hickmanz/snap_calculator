@@ -1,7 +1,7 @@
 {
-    "name": "Snap Fit Calculator",
+    "name": "Snap Calc",
     "description": "This app does one little thing, and does it well.",
-    "website": "https://snap.hickman.house",
+    "website": "https://snapcalc.io",
     "repository": "https://github.com/hickmanz/snap_calculator",
     "logo": "https://www.assemblymag.com/ext/resources/Issues/2014/april/snap-fit/asb0414Snap3.jpg"
 }

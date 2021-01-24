@@ -34,8 +34,7 @@
         </h2>
 
         <v-row justify="center">
-          <a
-            v-for="(next, i) in whatsNext"
+          <a v-for="(next, i) in whatsNext"
             :key="i"
             :href="next.href"
             class="subheading mx-3"
@@ -55,8 +54,7 @@
         </h2>
 
         <v-row justify="center">
-          <a
-            v-for="(link, i) in importantLinks"
+          <a v-for="(link, i) in importantLinks"
             :key="i"
             :href="link.href"
             class="subheading mx-3"
