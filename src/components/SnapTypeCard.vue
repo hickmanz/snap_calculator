@@ -38,6 +38,11 @@
                         ></v-autocomplete>
                      </v-col>
                 </v-row>
+                <v-btn
+                  color="primary.lighten"
+                  elevation="2"
+                  small
+                >edit materials</v-btn>
             </v-container>
         </v-card>
     </div>
