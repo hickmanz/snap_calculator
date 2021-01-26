@@ -42,6 +42,7 @@
                   color="primary.lighten"
                   elevation="2"
                   small
+                  :disabled="materialEdit"
                 >edit materials</v-btn>
             </v-container>
         </v-card>
@@ -56,12 +57,9 @@ import { SnapType } from '@/store/types'
 
 export default Vue.extend({
   name: 'SnapType',
-  data () {
-    return {
-      message: '',
-      snapShown: false
-    }
-  },
+  data: () => ({
+    materialEdit: true
+  }),
   computed: {
     ...mapState(['snapType', 'snapOptions', 'inputs', 'materials', 'selectedMaterial']),
     snapImage () {

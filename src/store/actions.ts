@@ -1,8 +1,9 @@
 import { ActionTree } from 'vuex'
 import { RootState, LooseObject, Scope } from './types'
-
+import { Config } from './config/types'
 import { create, all } from 'mathjs'
 import regression, { DataPoint } from 'regression'
+import { config } from './config'
 
 const math = create(all)
 
@@ -22,6 +23,12 @@ const closestIndex = (num: number, arr: number[]) => {
 }
 
 export const actions: ActionTree<RootState, RootState> = {
+  async init ({ dispatch }, payload: Config) {
+    // Should init the store, and ensure we've loaded our
+    // configuration if there is any.
+    const initLocal = await dispatch('config/initLocal', payload)
+    return [initLocal]
+  },
   updateInput (context, payload) {
     for (const inputField in context.state.inputs) {
       if (context.state.inputs[inputField].id === payload.id) {

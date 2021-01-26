@@ -2,6 +2,7 @@
 import { EquationState } from '@/store/equations/types'
 import { QEquationState } from '@/store/qCurves/types'
 import { MaterialData } from './materials/types'
+import { ConfigState } from './config/types'
 
 export interface RootState {
   units: 'metric' | 'standard'
@@ -16,6 +17,7 @@ export interface RootState {
   errors: ErrorState
   equations?: EquationState 
   qEquations?: QEquationState
+  config?: ConfigState
 }
 
 export interface ErrorState{

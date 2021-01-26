@@ -2,7 +2,7 @@
   <v-container fluid class="constrained-width px-2 px-sm-4">
     <v-row class="mt-0 mt-sm-2">
       <v-col cols="12" md="4" class="pt-0">
-        <snap-type-card />
+        <snap-type-card outlined />
       </v-col>
       <v-col cols="12" md="4" class="pt-0">
         <inputs-card />

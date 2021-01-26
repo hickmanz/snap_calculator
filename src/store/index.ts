@@ -7,6 +7,7 @@ import { RootState, CalculationData, InputData, ResultsData, SnapType } from './
 import { materials } from './materials'
 import { equations } from './equations'
 import { qEquations } from './qCurves'
+import { config } from './config'
 
 Vue.use(Vuex)
 
@@ -179,7 +180,8 @@ export default new Vuex.Store<RootState>({
   modules: {
     materials,
     equations,
-    qEquations
+    qEquations,
+    config
   },
   mutations: {
     updateSnapType (state, type: SnapType) {
